@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id "application"
+}
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+}
+dependencies {
+    implementation "com.formdev:flatlaf:0.38"
+    implementation "org.swinglabs.swingx:swingx-core:1.6.5-1"
+}
+application {
+    mainClassName = "GUI.SudokuThing"
+}
+version "0.1-ALPHA"
+task fatJar(type: Jar) {
+    manifest {
+        attributes(
+                "Main-Class": "$mainClassName"
+        )
+    }
+    outputs.upToDateWhen { false }
+    project.archivesBaseName = "SudokuThing"
+    from {
+        configurations.runtimeClasspath.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    with jar
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+artifacts {
+    archives fatJar
+}
+
