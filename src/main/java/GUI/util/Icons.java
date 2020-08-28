@@ -6,8 +6,8 @@ import java.awt.*;
 import java.io.IOException;
 
 public class Icons {
-    public static final Image CROSS = load("cross.png");
-    public static final Image FILLED = load("filled.png");
+    public static final Image CROSS = load("/icon/cross.png");
+    public static final Image FILLED = load("/icon/filled.png");
 
     public static Image load(String path) {
         try {

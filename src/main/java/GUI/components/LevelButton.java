@@ -13,8 +13,9 @@ public class LevelButton extends JButton {
 
     private void addButton() {
         JButton button = new JButton();
-//        this.setName("level");
-        this.setMinimumSize(new Dimension(64, 64));
+
+        this.setPreferredSize(new Dimension(64, 64));
+        this.setFocusable(false);
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -34,7 +35,6 @@ public class LevelButton extends JButton {
     public boolean getState() {
         return buttonState;
     }
-
 
     public void ruleOut() {
         this.setEnabled(false);
@@ -58,8 +58,6 @@ public class LevelButton extends JButton {
     }
 
     private void mistake() {
-        //TODO
-        System.out.println("mistake");
     }
 
     public void reset() {
