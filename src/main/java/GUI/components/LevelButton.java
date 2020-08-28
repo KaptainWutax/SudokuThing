@@ -1,11 +1,10 @@
 package GUI.components;
 
-import javax.imageio.ImageIO;
+import GUI.util.Icons;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
 
 public class LevelButton extends JButton {
     public LevelButton() {
@@ -70,16 +69,4 @@ public class LevelButton extends JButton {
         this.setDisabledIcon(null);
     }
 }
-class Icons {
-    public static final Image CROSS = load("cross.png");
-    public static final Image FILLED = load("filled.png");
 
-    public static Image load(String path) {
-        try {
-            return ImageIO.read(LevelButton.class.getResource(path));
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
-    }
-}
