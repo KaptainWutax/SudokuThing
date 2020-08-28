@@ -1,9 +1,11 @@
 package GUI.components;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 public class LevelButton extends JButton {
     public LevelButton() {
@@ -34,16 +36,17 @@ public class LevelButton extends JButton {
         return buttonState;
     }
 
+
     public void ruleOut() {
         this.setEnabled(false);
-        this.setIcon(new ImageIcon(getClass().getResource("/icon/cross.png")));
-        this.setDisabledIcon(new ImageIcon(getClass().getResource("/icon/cross.png")));
+        this.setIcon(new ImageIcon(Icons.CROSS));
+        this.setDisabledIcon(new ImageIcon(Icons.CROSS));
     }
 
     public void confirm() {
         this.setEnabled(false);
-        this.setIcon(new ImageIcon(getClass().getResource("/icon/filled.png")));
-        this.setDisabledIcon(new ImageIcon(getClass().getResource("/icon/filled.png")));
+        this.setIcon(new ImageIcon(Icons.FILLED));
+        this.setDisabledIcon(new ImageIcon(Icons.FILLED));
     }
 
     public void solve() {
@@ -65,5 +68,18 @@ public class LevelButton extends JButton {
         this.setSelected(false);
         this.setIcon(null);
         this.setDisabledIcon(null);
+    }
+}
+class Icons {
+    public static final Image CROSS = load("cross.png");
+    public static final Image FILLED = load("filled.png");
+
+    public static Image load(String path) {
+        try {
+            return ImageIO.read(LevelButton.class.getResource(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 }

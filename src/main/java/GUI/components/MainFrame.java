@@ -8,17 +8,18 @@ public class MainFrame {
     public MainFrame() {
         initComponents();
     }
-    public JFrame MainFrame;
+    public JFrame mainFrame;
     private void initComponents() {
-        MainFrame = new JFrame();
+        mainFrame = new JFrame();
         JMenuBar mainMenu = new JMenuBar();
         JMenu gameMenu = new JMenu();
         JMenuItem newLevel = new JMenuItem();
         JMenuItem solveLevel = new JMenuItem();
         GamePanel gamePanel = new GamePanel();
 
-        MainFrame.setLayout(new BorderLayout());
+        mainFrame.setLayout(new BorderLayout());
         gameMenu.setText("Level");
+
         newLevel.setText("new");
         newLevel.addActionListener(e -> gamePanel.allButtons().forEach(LevelButton::reset));
 
@@ -29,8 +30,8 @@ public class MainFrame {
         gameMenu.add(newLevel);
         mainMenu.add(gameMenu);
 
-        MainFrame.add(gamePanel);
-        MainFrame.setJMenuBar(mainMenu);
-        MainFrame.pack();
+        mainFrame.add(gamePanel);
+        mainFrame.setJMenuBar(mainMenu);
+        mainFrame.pack();
     }
 }

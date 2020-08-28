@@ -16,7 +16,7 @@ public class SudokuThing {
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-        JFrame main = new MainFrame().MainFrame;
+        JFrame main = new MainFrame().mainFrame;
         main.setVisible(true);
         main.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         main.setTitle("SudokuThing");
