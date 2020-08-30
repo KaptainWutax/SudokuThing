@@ -8,6 +8,10 @@ public class GamePanel extends JPanel {
     public GamePanel() {
         addContent();
     }
+    public GamePanel(int gridSize){
+        setGridSize(gridSize);
+        addContent();
+    }
 
     private void addContent() {
         this.setLayout(new GridBagLayout());
@@ -26,6 +30,10 @@ public class GamePanel extends JPanel {
 
     public void setGridSize(int i) {
         gridSize = i;
+    }
+
+    public int getGridSize() {
+        return gridSize;
     }
 
     public ArrayList<LevelButton> allButtons() {

@@ -3,7 +3,8 @@ package GUI.components;
 import javax.swing.*;
 
 public class InfoPanel extends JPanel {
-    public InfoPanel() {
+    public InfoPanel(GamePanel gamePanel) {
+        setStartBoxes((gamePanel.getGridSize() * gamePanel.getGridSize()));
         addInfo();
     }
 
@@ -20,7 +21,12 @@ public class InfoPanel extends JPanel {
         this.add(progressInfo);
     }
     private int hp = 3;
-    private int boxes = 225;
+    private int startBoxes;
+    private int boxes;
+
+    private void setStartBoxes(int i) {
+        startBoxes = boxes = i;
+    }
 
     public int getHp() {
         return hp;
@@ -45,7 +51,7 @@ public class InfoPanel extends JPanel {
 
     public void reset() {
         this.setHp(3);
-        this.setBoxes(225);
+        this.setBoxes(startBoxes);
         this.reprint();
     }
 }

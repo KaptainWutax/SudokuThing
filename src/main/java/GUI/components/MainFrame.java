@@ -16,7 +16,7 @@ public class MainFrame extends JFrame{
         JMenuItem newLevel = new JMenuItem();
         JMenuItem solveLevel = new JMenuItem();
         gamePanel = new GamePanel();
-        infoPanel = new InfoPanel();
+        infoPanel = new InfoPanel(gamePanel);
         this.setLayout(new BorderLayout());
 
         gameMenu.setText("Level");
@@ -53,6 +53,13 @@ public class MainFrame extends JFrame{
     public void updateBoxes() {
         infoPanel.setBoxes(infoPanel.getBoxes() - 1);
         infoPanel.reprint();
+        if (infoPanel.getBoxes() == 0) {
+            EndPrompt wonGame = new EndPrompt();
+
+            wonGame.endText.setForeground(Color.GREEN);
+            wonGame.setEndtext("Game won");
+            wonGame.setVisible(true);
+        }
     }
 
     public void solveAll() {

@@ -32,6 +32,7 @@ public class EndPrompt extends JDialog {
         this.setTitle("Level done");
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
+        this.setAlwaysOnTop(true);
         this.pack();
     }
 
