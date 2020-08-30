@@ -1,6 +1,7 @@
 package GUI.components;
 
 import levels.Level;
+import levels.LevelCreator;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -16,23 +17,37 @@ public class GamePanel extends JPanel {
     }
     public GamePanel(Level level) {
         setGridSize(level.getSize());
-        //TODO
+        layout = level.getLayout();
+        addContent();
+        setupLevel();
     }
+    private int gridSize;
+    private LevelButton[][] ButtonTable;
+    private int[] layout;
 
     private void addContent() {
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
+        ButtonTable = new LevelButton[gridSize][gridSize];
 
         for (int y = 0; y < gridSize; y++) {
             gbc.gridy = y;
             for (int x = 0; x < gridSize; x++) {
                 gbc.gridx = x;
-                this.add(new LevelButton(), gbc);
+                ButtonTable[x][y] = new LevelButton();
+                this.add(ButtonTable[x][y], gbc);
             }
         }
     }
 
-    private int gridSize;
+    private void setupLevel() {
+        int i = 0;
+        for (LevelButton[] row : ButtonTable) {
+            LevelCreator.setRow(row,layout[i]);
+            i++;
+        }
+    }
+
 
     public void setGridSize(int i) {
         gridSize = i;

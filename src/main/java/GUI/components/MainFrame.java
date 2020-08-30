@@ -1,5 +1,7 @@
 package GUI.components;
 
+import levels.Level;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -15,7 +17,7 @@ public class MainFrame extends JFrame{
         JMenu gameMenu = new JMenu();
         JMenuItem newLevel = new JMenuItem();
         JMenuItem solveLevel = new JMenuItem();
-        gamePanel = new GamePanel();
+        gamePanel = new GamePanel(Level.LEVEL0);
         infoPanel = new InfoPanel(gamePanel);
         this.setLayout(new BorderLayout());
 

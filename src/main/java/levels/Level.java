@@ -2,7 +2,7 @@ package levels;
 
 public enum Level {
 
-    LEVEL0(0,15,new int[15]);
+    LEVEL0(0,15, new int[15]);
 
     private final int stage;
     private final int size;
