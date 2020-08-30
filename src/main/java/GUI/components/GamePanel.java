@@ -10,7 +10,6 @@ public class GamePanel extends JPanel {
     }
 
     private void addContent() {
-        JPanel gamePanel = new JPanel();
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 

@@ -1,5 +1,6 @@
 package GUI.components;
 
+import GUI.SudokuThing;
 import GUI.util.Icons;
 import javax.swing.*;
 import java.awt.*;
@@ -12,20 +13,20 @@ public class LevelButton extends JButton {
     }
 
     private void addButton() {
-        JButton button = new JButton();
-
         this.setPreferredSize(new Dimension(64, 64));
         this.setFocusable(false);
-        this.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                solve();
-                if((getState() && SwingUtilities.isRightMouseButton(e)) || (!getState() && SwingUtilities.isLeftMouseButton(e))) {
-                    mistake();
-                }
-            }
-        });
+        this.addMouseListener(mouseListener);
     }
+    private final MouseAdapter mouseListener = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            solve();
+            SudokuThing.INSTANCE.updateBoxes();
+            if((getState() && SwingUtilities.isRightMouseButton(e)) || (!getState() && SwingUtilities.isLeftMouseButton(e))) {
+                mistake();
+            }
+        }
+    };
     private boolean buttonState;
 
     public void setState(boolean state) {
@@ -55,9 +56,11 @@ public class LevelButton extends JButton {
         else {
             ruleOut();
         }
+        this.removeMouseListener(mouseListener);
     }
 
     private void mistake() {
+        SudokuThing.INSTANCE.looseHP();
     }
 
     public void reset() {
@@ -65,6 +68,7 @@ public class LevelButton extends JButton {
         this.setSelected(false);
         this.setIcon(null);
         this.setDisabledIcon(null);
+        this.addMouseListener(mouseListener);
     }
 }
 

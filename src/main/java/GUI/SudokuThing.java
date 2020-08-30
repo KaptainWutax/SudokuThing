@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SudokuThing {
+    public static MainFrame INSTANCE;
     public static void main(String[] args) {
 
         FlatLightLaf.install();
@@ -16,13 +17,13 @@ public class SudokuThing {
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
-        JFrame main = new MainFrame().mainFrame;
-        main.setVisible(true);
-        main.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        main.setTitle("SudokuThing");
+        INSTANCE = new MainFrame();
+        INSTANCE.setVisible(true);
+        INSTANCE.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        INSTANCE.setTitle("SudokuThing");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        main.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        main.setSize(screenSize.width / 2, screenSize.height / 2);
-        main.pack();
+        INSTANCE.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        INSTANCE.setSize(screenSize.width / 2, screenSize.height / 2);
+        INSTANCE.pack();
     }
 }
