@@ -1,16 +1,22 @@
 package GUI.components;
 
+import levels.Level;
+
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
 public class GamePanel extends JPanel {
     public GamePanel() {
-        addContent();
+        this(15);
     }
     public GamePanel(int gridSize){
         setGridSize(gridSize);
         addContent();
+    }
+    public GamePanel(Level level) {
+        setGridSize(level.getSize());
+        //TODO
     }
 
     private void addContent() {
@@ -26,7 +32,7 @@ public class GamePanel extends JPanel {
         }
     }
 
-    private int gridSize = 15;
+    private int gridSize;
 
     public void setGridSize(int i) {
         gridSize = i;
