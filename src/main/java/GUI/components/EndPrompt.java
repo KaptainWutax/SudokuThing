@@ -23,13 +23,13 @@ public class EndPrompt extends JDialog {
         confirmButton.setPreferredSize(new Dimension(150,30));
         confirmButton.addActionListener(e -> {
             this.dispose();
-            SudokuThing.INSTANCE.newGame();
+            SudokuThing.INSTANCE.restartGame();
         });
 
         this.setLayout(new BorderLayout());
         this.add(endText,BorderLayout.NORTH);
         this.add(confirmButton,BorderLayout.CENTER);
-        this.setTitle("Level done");
+        this.setTitle("Level " + SudokuThing.INSTANCE.gamePanel.getCurrentLevel().getStage());
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setAlwaysOnTop(true);

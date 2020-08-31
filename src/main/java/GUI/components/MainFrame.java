@@ -15,21 +15,31 @@ public class MainFrame extends JFrame{
     private void initComponents() {
         JMenuBar mainMenu = new JMenuBar();
         JMenu gameMenu = new JMenu();
-        JMenuItem newLevel = new JMenuItem();
+        JMenuItem restart = new JMenuItem();
         JMenuItem solveLevel = new JMenuItem();
+        JMenuItem nextLevel = new JMenuItem();
         gamePanel = new GamePanel(Level.LEVEL0);
         infoPanel = new InfoPanel(gamePanel);
         this.setLayout(new BorderLayout());
 
         gameMenu.setText("Level");
-        newLevel.setText("new");
-        newLevel.addActionListener(e -> newGame());
+        restart.setText("restart");
+        restart.addActionListener(e -> restartGame());
 
         solveLevel.setText("solve");
         solveLevel.addActionListener(e -> solveAll());
 
+        nextLevel.setText("skip");
+        nextLevel.addActionListener(e -> {
+            gamePanel.loadLevel(Level.nextLevel(gamePanel.getCurrentLevel()));
+            infoPanel.reset();
+
+            restartGame();
+        });
+
         gameMenu.add(solveLevel);
-        gameMenu.add(newLevel);
+        gameMenu.add(restart);
+        gameMenu.add(nextLevel);
         mainMenu.add(gameMenu);
 
         this.add(gamePanel,BorderLayout.CENTER);
@@ -69,7 +79,7 @@ public class MainFrame extends JFrame{
         gamePanel.repaint();
     }
 
-    public void newGame() {
+    public void restartGame() {
         gamePanel.allButtons().forEach(LevelButton::reset);
         infoPanel.reset();
     }

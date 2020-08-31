@@ -16,11 +16,9 @@ public class GamePanel extends JPanel {
         addContent();
     }
     public GamePanel(Level level) {
-        setGridSize(level.getSize());
-        layout = level.getLayout();
-        addContent();
-        setupLevel();
+        loadLevel(level);
     }
+    private Level currentLevel;
     private int gridSize;
     private LevelButton[][] ButtonTable;
     private int[] layout;
@@ -30,12 +28,12 @@ public class GamePanel extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         ButtonTable = new LevelButton[gridSize][gridSize];
 
-        for (int y = 0; y < gridSize; y++) {
-            gbc.gridy = y;
-            for (int x = 0; x < gridSize; x++) {
-                gbc.gridx = x;
-                ButtonTable[x][y] = new LevelButton();
-                this.add(ButtonTable[x][y], gbc);
+        for (int x = 0; x < gridSize; x++) {
+            gbc.gridx = x;
+            for (int y = 0; y < gridSize; y++) {
+                gbc.gridy = y;
+                ButtonTable[y][x] = new LevelButton();
+                this.add(ButtonTable[y][x], gbc);
             }
         }
     }
@@ -48,13 +46,16 @@ public class GamePanel extends JPanel {
         }
     }
 
-
     public void setGridSize(int i) {
         gridSize = i;
     }
 
     public int getGridSize() {
         return gridSize;
+    }
+
+    public Level getCurrentLevel() {
+        return currentLevel;
     }
 
     public ArrayList<LevelButton> allButtons() {
@@ -65,5 +66,14 @@ public class GamePanel extends JPanel {
             }
         }
         return out;
+    }
+
+    public void loadLevel(Level level) {
+        setGridSize(level.getSize());
+        currentLevel = level;
+        layout = level.getLayout();
+        this.removeAll();
+        addContent();
+        setupLevel();
     }
 }
