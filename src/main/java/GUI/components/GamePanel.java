@@ -2,11 +2,10 @@ package GUI.components;
 
 import levels.Level;
 import levels.LevelCreator;
-import org.jdesktop.swingx.JXLabel;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import javax.swing.*;
 
 public class GamePanel extends JPanel {
     public GamePanel() {
@@ -25,6 +24,7 @@ public class GamePanel extends JPanel {
     private int[] layout;
 
     private void addContent() {
+        this.removeAll();
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         ButtonTable = new LevelButton[gridSize][gridSize];
@@ -45,10 +45,7 @@ public class GamePanel extends JPanel {
         for (int i = 0; i < gridSize; i++) {
             gbc.gridx = i+1;
             gbc.gridy = 0;
-            JXLabel hintLabel = new JXLabel();
-            hintLabel.setLineWrap(true);
-            hintLabel.setText(LevelCreator.getCollumnHints(layout)[i]);
-            this.add(hintLabel, gbc);
+            this.add(new JLabel(String.format("<html><margin = 10 px> %s </margin></html>",LevelCreator.getCollumnHints(layout)[i])), gbc);
         }
     }
 
@@ -83,15 +80,16 @@ public class GamePanel extends JPanel {
     }
 
     public void loadLevel(Level level) {
-        this.removeAll();
         setGridSize(level.getSize());
         currentLevel = level;
-        try {
-            layout = level.getLayout();
-        } catch (NullPointerException e) {
-            layout = LevelCreator.randomLayout(level.getSize());
+        layout = level.getLayout();
+        if(layout == null){
+        layout = LevelCreator.randomLayout(level.getSize());
         }
         addContent();
         setupLevel();
+
+        this.revalidate();
+        this.repaint();
     }
 }

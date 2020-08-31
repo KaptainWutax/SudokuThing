@@ -39,8 +39,7 @@ public class MainFrame extends JFrame {
         randomLevel.setText("random");
         randomLevel.addActionListener(e -> {
             gamePanel.loadLevel(Level.LEVELRANDOM);
-
-            restartGame();
+            infoPanel.reset();
         });
 
         gameMenu.add(solveLevel);
