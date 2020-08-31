@@ -4,9 +4,11 @@ import levels.Level;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 
-public class MainFrame extends JFrame{
+public class MainFrame extends JFrame {
     public MainFrame() {
         initComponents();
     }
@@ -65,7 +67,7 @@ public class MainFrame extends JFrame{
     public void updateBoxes() {
         infoPanel.setBoxes(infoPanel.getBoxes() - 1);
         infoPanel.reprint();
-        if (infoPanel.getBoxes() == 0) {
+        if (infoPanel.getBoxes() == 0 || !hasButtonsLeft()) {
             EndPrompt wonGame = new EndPrompt();
 
             wonGame.endText.setForeground(Color.GREEN);
@@ -82,5 +84,9 @@ public class MainFrame extends JFrame{
     public void restartGame() {
         gamePanel.allButtons().forEach(LevelButton::reset);
         infoPanel.reset();
+    }
+
+    private boolean hasButtonsLeft() {
+        return gamePanel.allButtons().stream().anyMatch(lb -> lb.getState() && lb.isEnabled());
     }
 }

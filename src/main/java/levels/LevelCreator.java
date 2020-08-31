@@ -85,7 +85,6 @@ public class LevelCreator {
         return list.toArray(new String[0]);
     }
 
-
     public static void main(String[] args) {
 //        System.out.print(stringToBitRow("11011 11111 11111") + ", ");
 //        System.out.print(stringToBitRow("10001 11111 11011") + ", ");
@@ -106,7 +105,6 @@ public class LevelCreator {
 //        System.out.print(stringToBitRow("11111 11000 00001") + ", ");
 //        System.out.println(Arrays.deepToString(transpose(toBinaryTable(Level.LEVEL0.getLayout()))));
 //        System.out.println(Arrays.toString(parseHint("1110101011000101010101010101")));
-        System.out.println(Arrays.toString(getCollumnHints(Level.LEVEL0.getLayout())));
-
+        System.out.println(Arrays.toString(getRowHints(Level.LEVEL0.getLayout())));
     }
 }

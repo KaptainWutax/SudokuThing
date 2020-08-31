@@ -14,12 +14,13 @@ public class LevelButton extends JButton {
 
     private void addButton() {
         this.setPreferredSize(new Dimension(64, 64));
+        this.setMinimumSize(new Dimension(48,48));
         this.setFocusable(false);
         this.addMouseListener(mouseListener);
     }
     private final MouseAdapter mouseListener = new MouseAdapter() {
         @Override
-        public void mouseClicked(MouseEvent e) {
+        public void mousePressed(MouseEvent e) {
             solve();
             SudokuThing.INSTANCE.updateBoxes();
             if((getState() && SwingUtilities.isRightMouseButton(e)) || (!getState() && SwingUtilities.isLeftMouseButton(e))) {

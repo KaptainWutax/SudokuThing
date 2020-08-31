@@ -2,6 +2,7 @@ package GUI.components;
 
 import levels.Level;
 import levels.LevelCreator;
+import org.jdesktop.swingx.JXLabel;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -29,12 +30,25 @@ public class GamePanel extends JPanel {
         ButtonTable = new LevelButton[gridSize][gridSize];
 
         for (int x = 0; x < gridSize; x++) {
-            gbc.gridx = x;
+            gbc.gridx = x+1;
             for (int y = 0; y < gridSize; y++) {
-                gbc.gridy = y;
+                gbc.gridy = y+1;
                 ButtonTable[y][x] = new LevelButton();
                 this.add(ButtonTable[y][x], gbc);
             }
+        }
+        for (int i = 0; i < gridSize; i++) {
+            gbc.gridx = 0;
+            gbc.gridy = i+1;
+            this.add(new JLabel(LevelCreator.getRowHints(layout)[i]),gbc);
+        }
+        for (int i = 0; i < gridSize; i++) {
+            gbc.gridx = i+1;
+            gbc.gridy = 0;
+            JXLabel hintLabel = new JXLabel();
+            hintLabel.setLineWrap(true);
+            hintLabel.setText(LevelCreator.getCollumnHints(layout)[i]);
+            this.add(hintLabel, gbc);
         }
     }
 
