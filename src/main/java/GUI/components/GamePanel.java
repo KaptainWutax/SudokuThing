@@ -83,10 +83,14 @@ public class GamePanel extends JPanel {
     }
 
     public void loadLevel(Level level) {
+        this.removeAll();
         setGridSize(level.getSize());
         currentLevel = level;
-        layout = level.getLayout();
-        this.removeAll();
+        try {
+            layout = level.getLayout();
+        } catch (NullPointerException e) {
+            layout = LevelCreator.randomLayout(level.getSize());
+        }
         addContent();
         setupLevel();
     }

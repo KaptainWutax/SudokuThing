@@ -4,9 +4,6 @@ import levels.Level;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicReference;
-
 
 public class MainFrame extends JFrame {
     public MainFrame() {
@@ -20,6 +17,7 @@ public class MainFrame extends JFrame {
         JMenuItem restart = new JMenuItem();
         JMenuItem solveLevel = new JMenuItem();
         JMenuItem nextLevel = new JMenuItem();
+        JMenuItem randomLevel = new JMenuItem();
         gamePanel = new GamePanel(Level.LEVEL0);
         infoPanel = new InfoPanel(gamePanel);
         this.setLayout(new BorderLayout());
@@ -31,10 +29,16 @@ public class MainFrame extends JFrame {
         solveLevel.setText("solve");
         solveLevel.addActionListener(e -> solveAll());
 
-        nextLevel.setText("skip");
+        nextLevel.setText("next");
         nextLevel.addActionListener(e -> {
             gamePanel.loadLevel(Level.nextLevel(gamePanel.getCurrentLevel()));
-            infoPanel.reset();
+
+            restartGame();
+        });
+
+        randomLevel.setText("random");
+        randomLevel.addActionListener(e -> {
+            gamePanel.loadLevel(Level.LEVELRANDOM);
 
             restartGame();
         });
@@ -42,6 +46,7 @@ public class MainFrame extends JFrame {
         gameMenu.add(solveLevel);
         gameMenu.add(restart);
         gameMenu.add(nextLevel);
+        gameMenu.add(randomLevel);
         mainMenu.add(gameMenu);
 
         this.add(gamePanel,BorderLayout.CENTER);

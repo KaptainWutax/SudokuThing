@@ -2,6 +2,7 @@ package levels;
 
 public enum Level {
 
+    LEVELRANDOM(-1,15,null),
     LEVEL0(0,15, Layouts.level0);
 
     private final int stage;
@@ -39,6 +40,7 @@ public enum Level {
 
 }
 class Layouts{
+    public static final int[] random15 = LevelCreator.randomLayout(15);
     public static final int[] level0 = {
             32763, 28657, 4038, 1537, 16384, 6161, 4405, 5036, 17158, 2051, 2561, 6535, 12485, 24699, 16511
     };

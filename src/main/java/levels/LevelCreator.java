@@ -4,6 +4,7 @@ import GUI.components.LevelButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class LevelCreator {
 
@@ -23,6 +24,25 @@ public class LevelCreator {
             }
         }
         return bitRow;
+    }
+
+    private static int randomBitRow(int lenght) {
+        int bitRow = 0;
+        Random random = new Random();
+        for (int i = 0; i < lenght; i++) {
+            if (random.nextBoolean()) {
+                bitRow |= 1 << i;
+            }
+        }
+        return bitRow;
+    }
+
+    public static int[] randomLayout(int size) {
+        int[] layout = new int[size];
+        for (int i = 0; i < size; i++) {
+            layout[i] = randomBitRow(size);
+        }
+        return layout;
     }
 
     private static int[][] toBinaryTable(int[] layout) {
@@ -105,6 +125,6 @@ public class LevelCreator {
 //        System.out.print(stringToBitRow("11111 11000 00001") + ", ");
 //        System.out.println(Arrays.deepToString(transpose(toBinaryTable(Level.LEVEL0.getLayout()))));
 //        System.out.println(Arrays.toString(parseHint("1110101011000101010101010101")));
-        System.out.println(Arrays.toString(getRowHints(Level.LEVEL0.getLayout())));
+//        System.out.println(Arrays.toString(getRowHints(Level.LEVEL0.getLayout())));
     }
 }
