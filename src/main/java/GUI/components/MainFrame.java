@@ -37,10 +37,7 @@ public class MainFrame extends JFrame {
         });
 
         randomLevel.setText("random");
-        randomLevel.addActionListener(e -> {
-            gamePanel.loadLevel(Level.LEVELRANDOM);
-            infoPanel.reset();
-        });
+        randomLevel.addActionListener(e -> newRandomGame());
 
         gameMenu.add(solveLevel);
         gameMenu.add(restart);
@@ -87,6 +84,11 @@ public class MainFrame extends JFrame {
 
     public void restartGame() {
         gamePanel.allButtons().forEach(LevelButton::reset);
+        infoPanel.reset();
+    }
+
+    public void newRandomGame() {
+        gamePanel.loadLevel(Level.LEVELRANDOM);
         infoPanel.reset();
     }
 

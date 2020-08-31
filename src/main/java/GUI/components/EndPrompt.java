@@ -23,7 +23,7 @@ public class EndPrompt extends JDialog {
         confirmButton.setPreferredSize(new Dimension(150,30));
         confirmButton.addActionListener(e -> {
             this.dispose();
-            SudokuThing.INSTANCE.restartGame();
+            SudokuThing.INSTANCE.newRandomGame();
         });
 
         this.setLayout(new BorderLayout());

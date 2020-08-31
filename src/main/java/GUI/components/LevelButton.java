@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import static javax.swing.SwingUtilities.isLeftMouseButton;
+import static javax.swing.SwingUtilities.isRightMouseButton;
+
 public class LevelButton extends JButton {
     public LevelButton() {
         this.addButton();
@@ -23,9 +26,15 @@ public class LevelButton extends JButton {
         public void mousePressed(MouseEvent e) {
             solve();
             SudokuThing.INSTANCE.updateBoxes();
-            if((getState() && SwingUtilities.isRightMouseButton(e)) || (!getState() && SwingUtilities.isLeftMouseButton(e))) {
+            if((getState() && isRightMouseButton(e)) || (!getState() && isLeftMouseButton(e))) {
                 mistake();
             }
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            if(isRightMouseButton(e) || isLeftMouseButton(e))this.mousePressed(e);
+
         }
     };
     private boolean buttonState;
