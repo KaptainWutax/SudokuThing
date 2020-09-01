@@ -1,6 +1,7 @@
 package GUI.components;
 
 import GUI.SudokuThing;
+import levels.LevelCreator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,12 +23,16 @@ public class InfoPanel extends JPanel {
         shareLayout.setText("copy layout");
         shareLayout.addActionListener(e -> Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(Arrays.toString(SudokuThing.INSTANCE.gamePanel.getCurrentLevel())), null));
 
-
-
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.add(healthInfo);
         this.add(progressInfo);
         this.add(shareLayout);
+        if (false) {
+            JButton hintButton = new JButton();
+            hintButton.setText("get Hint");
+            hintButton.addActionListener(e -> Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(String.join(",", LevelCreator.getRowHints(SudokuThing.INSTANCE.gamePanel.getCurrentLevel())).concat(";").concat(String.join(",", LevelCreator.getCollumnHints(SudokuThing.INSTANCE.gamePanel.getCurrentLevel())).replaceAll("\n"," "))),null));
+            this.add(hintButton);
+        }
     }
     private int hp;
     private int boxes;
