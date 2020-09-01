@@ -29,10 +29,11 @@ public class EndPrompt extends JDialog {
         this.setLayout(new BorderLayout());
         this.add(endText,BorderLayout.NORTH);
         this.add(confirmButton,BorderLayout.CENTER);
-        this.setTitle("Level " + SudokuThing.INSTANCE.gamePanel.getCurrentLevel().getStage());
+        this.setTitle("Game Over");
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setAlwaysOnTop(true);
+        this.setVisible(true);
         this.pack();
     }
 

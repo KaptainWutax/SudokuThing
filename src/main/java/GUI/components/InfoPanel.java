@@ -1,10 +1,14 @@
 package GUI.components;
 
+import GUI.SudokuThing;
+
 import javax.swing.*;
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.util.Arrays;
 
 public class InfoPanel extends JPanel {
-    public InfoPanel(GamePanel gamePanel) {
-        setStartBoxes((gamePanel.getGridSize() * gamePanel.getGridSize()));
+    public InfoPanel() {
         addInfo();
     }
 
@@ -13,20 +17,20 @@ public class InfoPanel extends JPanel {
     private void addInfo() {
         healthInfo = new JLabel();
         progressInfo = new JLabel();
+        JButton shareLayout = new JButton();
 
-        reprint();
+        shareLayout.setText("copy layout");
+        shareLayout.addActionListener(e -> Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(Arrays.toString(SudokuThing.INSTANCE.gamePanel.getCurrentLevel())), null));
+
+
 
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.add(healthInfo);
         this.add(progressInfo);
+        this.add(shareLayout);
     }
-    private int hp = 3;
-    private int startBoxes;
+    private int hp;
     private int boxes;
-
-    private void setStartBoxes(int i) {
-        startBoxes = boxes = i;
-    }
 
     public int getHp() {
         return hp;
@@ -51,7 +55,7 @@ public class InfoPanel extends JPanel {
 
     public void reset() {
         this.setHp(3);
-        this.setBoxes(startBoxes);
+        this.setBoxes(SudokuThing.INSTANCE.gamePanel.getGridSize() * SudokuThing.INSTANCE.gamePanel.getGridSize());
         this.reprint();
     }
 }

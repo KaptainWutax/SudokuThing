@@ -1,6 +1,6 @@
 package GUI.components;
 
-import levels.Level;
+import levels.LevelCreator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,9 +17,9 @@ public class MainFrame extends JFrame {
         JMenuItem restart = new JMenuItem();
         JMenuItem solveLevel = new JMenuItem();
         JMenuItem nextLevel = new JMenuItem();
-        JMenuItem randomLevel = new JMenuItem();
-        gamePanel = new GamePanel(Level.LEVEL0);
-        infoPanel = new InfoPanel(gamePanel);
+        JMenuItem loadLevel = new JMenuItem();
+        gamePanel = new GamePanel();
+        infoPanel = new InfoPanel();
         this.setLayout(new BorderLayout());
 
         gameMenu.setText("Level");
@@ -30,19 +30,17 @@ public class MainFrame extends JFrame {
         solveLevel.addActionListener(e -> solveAll());
 
         nextLevel.setText("next");
-        nextLevel.addActionListener(e -> {
-            gamePanel.loadLevel(Level.nextLevel(gamePanel.getCurrentLevel()));
+        nextLevel.addActionListener(e -> newRandomGame());
 
-            restartGame();
+        loadLevel.setText("from Layout");
+        loadLevel.addActionListener(e -> {
+            LoadPrompt p = new LoadPrompt();
         });
-
-        randomLevel.setText("random");
-        randomLevel.addActionListener(e -> newRandomGame());
 
         gameMenu.add(solveLevel);
         gameMenu.add(restart);
         gameMenu.add(nextLevel);
-        gameMenu.add(randomLevel);
+        gameMenu.add(loadLevel);
         mainMenu.add(gameMenu);
 
         this.add(gamePanel,BorderLayout.CENTER);
@@ -59,7 +57,6 @@ public class MainFrame extends JFrame {
 
             lostGame.endText.setForeground(Color.RED);
             lostGame.setEndtext("Game lost");
-            lostGame.setVisible(true);
 
             solveAll();
         }
@@ -73,7 +70,8 @@ public class MainFrame extends JFrame {
 
             wonGame.endText.setForeground(Color.GREEN);
             wonGame.setEndtext("Game won");
-            wonGame.setVisible(true);
+
+            solveAll();
         }
     }
 
@@ -88,7 +86,11 @@ public class MainFrame extends JFrame {
     }
 
     public void newRandomGame() {
-        gamePanel.loadLevel(Level.LEVELRANDOM);
+        newRandomGame(15);
+    }
+
+    public void newRandomGame(int size) {
+        gamePanel.loadLevel(LevelCreator.randomLayout(size));
         infoPanel.reset();
     }
 

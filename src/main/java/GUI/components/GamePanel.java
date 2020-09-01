@@ -1,6 +1,5 @@
 package GUI.components;
 
-import levels.Level;
 import levels.LevelCreator;
 
 import javax.swing.*;
@@ -9,19 +8,11 @@ import java.util.ArrayList;
 
 public class GamePanel extends JPanel {
     public GamePanel() {
-        this(15);
     }
-    public GamePanel(int gridSize){
-        setGridSize(gridSize);
-        addContent();
-    }
-    public GamePanel(Level level) {
-        loadLevel(level);
-    }
-    private Level currentLevel;
+
     private int gridSize;
     private LevelButton[][] ButtonTable;
-    private int[] layout;
+    private int[] currentLevel;
 
     private void addContent() {
         this.removeAll();
@@ -40,19 +31,19 @@ public class GamePanel extends JPanel {
         for (int i = 0; i < gridSize; i++) {
             gbc.gridx = 0;
             gbc.gridy = i+1;
-            this.add(new JLabel(LevelCreator.getRowHints(layout)[i]),gbc);
+            this.add(new JLabel(LevelCreator.getRowHints(currentLevel)[i]),gbc);
         }
         for (int i = 0; i < gridSize; i++) {
             gbc.gridx = i+1;
             gbc.gridy = 0;
-            this.add(new JLabel(String.format("<html><margin = 10 px> %s </margin></html>",LevelCreator.getCollumnHints(layout)[i])), gbc);
+            this.add(new JLabel(String.format("<html><margin = 10 px> %s </margin></html>",LevelCreator.getCollumnHints(currentLevel)[i])), gbc);
         }
     }
 
     private void setupLevel() {
         int i = 0;
         for (LevelButton[] row : ButtonTable) {
-            LevelCreator.setRow(row,layout[i]);
+            LevelCreator.setRow(row, currentLevel[i]);
             i++;
         }
     }
@@ -65,10 +56,6 @@ public class GamePanel extends JPanel {
         return gridSize;
     }
 
-    public Level getCurrentLevel() {
-        return currentLevel;
-    }
-
     public ArrayList<LevelButton> allButtons() {
         ArrayList<LevelButton> out = new ArrayList<>(gridSize * gridSize);
         for (Component lb : this.getComponents()) {
@@ -79,13 +66,14 @@ public class GamePanel extends JPanel {
         return out;
     }
 
-    public void loadLevel(Level level) {
-        setGridSize(level.getSize());
-        currentLevel = level;
-        layout = level.getLayout();
-        if(layout == null){
-        layout = LevelCreator.randomLayout(level.getSize());
-        }
+    public int[] getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public void loadLevel(int[] layout) {
+        setGridSize(layout.length);
+        this.currentLevel = layout;
+
         addContent();
         setupLevel();
 

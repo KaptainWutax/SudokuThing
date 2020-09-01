@@ -24,6 +24,7 @@ public class SudokuThing {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         INSTANCE.setExtendedState(JFrame.MAXIMIZED_BOTH);
         INSTANCE.setSize(screenSize.width / 2, screenSize.height / 2);
+        INSTANCE.newRandomGame();
         INSTANCE.pack();
     }
 }
